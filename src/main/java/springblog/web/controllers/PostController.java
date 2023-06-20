@@ -19,9 +19,8 @@ public class PostController {
 	
 	@RequestMapping("/posts/list")
 	public ModelAndView getAllPosts() {
-		System.out.println("Hello");
 		List<PostDTO> postDtoList = this.postService.getAllPosts();
-		ModelAndView mv = new ModelAndView("posts/list");
+		ModelAndView mv = new ModelAndView("postListView");
 		mv.addObject("posts", postDtoList);
 		return mv;
 	}

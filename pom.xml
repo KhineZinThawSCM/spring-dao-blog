@@ -20,6 +20,7 @@
 		<jstl.version>1.2</jstl.version>
 		<javax.persistence.api.version>2.2</javax.persistence.api.version>
 		<mysql.version>8.0.28</mysql.version>
+		<tiles.version>3.0.8</tiles.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -116,6 +117,22 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.22</version>
 		</dependency>
+		<!-- Spring Tiles Dependency -->
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-extras</artifactId>
+            <version>${tiles.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-servlet</artifactId>
+            <version>${tiles.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-jsp</artifactId>
+            <version>${tiles.version}</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<finalName>springblog</finalName>
