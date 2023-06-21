@@ -47,6 +47,7 @@
             <list>
                 <value>/WEB-INF/layouts/layouts.xml</value>
                 <value>/WEB-INF/layouts/post-view.xml</value>
+                <value>/WEB-INF/layouts/user-view.xml</value>
             </list>
         </property>
     </bean>

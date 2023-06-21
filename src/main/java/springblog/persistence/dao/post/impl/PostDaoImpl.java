@@ -27,4 +27,28 @@ public class PostDaoImpl implements PostDao {
     	 StringBuilder stmt = new StringBuilder(SELECT_STMT);
          return this.sessionFactory.getCurrentSession().createQuery(stmt.toString()).list();
 	}
+    
+    @Override
+    public void save(Post post) {
+        this.sessionFactory.getCurrentSession().save(post);
+    }
+    
+    @Override
+    public Post findById(Long id) {
+        return this.sessionFactory.getCurrentSession().get(Post.class, id);
+    }
+    
+    @Override
+    public void update(Post post) {
+        Post oldPost = this.findById(post.getId());
+        if (post.getUser() == null) {
+            post.setUser(oldPost.getUser());
+        }
+        this.sessionFactory.getCurrentSession().merge(post);
+    }
+    
+    @Override
+    public void delete(Post post) {
+        this.sessionFactory.getCurrentSession().delete(post);
+    }
 }

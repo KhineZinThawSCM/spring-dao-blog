@@ -23,6 +23,7 @@
 				<th>Id</th>
 				<th>Title</th>
 				<th>Description</th>
+				<td>User</td>
 				<th>Post Date</th>
 				<th>Action</th>
 			</tr>
@@ -31,6 +32,7 @@
 					<td>${post.id}</td>
 					<td>${post.title}</td>
 					<td>${post.description}</td>
+					<td>${post.user.name}</td>
 					<td>${post.created_at}</td>
 					<td><c:url var="editAction" value="/posts/edit?id=${post.id}" />
 						<c:url var="deleteAction" value="/posts/destroy?id=${post.id}" />
