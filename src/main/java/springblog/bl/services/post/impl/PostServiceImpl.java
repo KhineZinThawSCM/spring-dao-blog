@@ -17,54 +17,54 @@ import springblog.web.form.PostForm;
 @Service
 public class PostServiceImpl implements PostService {
 
-	@Autowired
-	private PostDao postDao;
-	
-	@Autowired
-	private UserDao userDao;
+    @Autowired
+    private PostDao postDao;
 
-	@Override
-	public List<PostDTO> getAllPosts() {
-		List<Post> posts = this.postDao.getAllPosts();
-		List<PostDTO> postDTOList = posts.stream().map(post -> {
-			PostDTO postDTO = new PostDTO(post);
-			return postDTO;
-		}).collect(Collectors.toList());
-		return postDTOList;
-	}
-	
-	@Override
-	public void savePost(PostForm postForm) {
-		User user = this.userDao.findById(postForm.getUserId());
-		Post post = new Post();
-		post.setTitle(postForm.getTitle());
-		post.setDescription(postForm.getDescription());
-		post.setUser(user);
-		
-		this.postDao.save(post);
-	}
-	
-	@Override
-	public PostDTO getPostById(Long id) {
-		Post post = this.postDao.findById(id);
-		PostDTO postDTO = new PostDTO(post);
-		return postDTO;
-	}
-	
-	@Override
-	public void updatePost(PostForm postForm) {
-		Post post = this.postDao.findById(postForm.getId());
-		User user = this.userDao.findById(postForm.getUserId());
-		post.setTitle(postForm.getTitle());
-		post.setDescription(postForm.getDescription());
-		post.setUser(user);
-		
-		this.postDao.update(post);
-	}
-	
-	@Override
-	public void deletePostById(Long id) {
-		Post post = this.postDao.findById(id);
-		this.postDao.delete(post);
-	}
+    @Autowired
+    private UserDao userDao;
+
+    @Override
+    public List<PostDTO> getAllPosts() {
+        List<Post> posts = this.postDao.getAllPosts();
+        List<PostDTO> postDTOList = posts.stream().map(post -> {
+            PostDTO postDTO = new PostDTO(post);
+            return postDTO;
+        }).collect(Collectors.toList());
+        return postDTOList;
+    }
+
+    @Override
+    public void savePost(PostForm postForm) {
+        User user = this.userDao.findById(postForm.getUserId());
+        Post post = new Post();
+        post.setTitle(postForm.getTitle());
+        post.setDescription(postForm.getDescription());
+        post.setUser(user);
+
+        this.postDao.save(post);
+    }
+
+    @Override
+    public PostDTO getPostById(Long id) {
+        Post post = this.postDao.findById(id);
+        PostDTO postDTO = new PostDTO(post);
+        return postDTO;
+    }
+
+    @Override
+    public void updatePost(PostForm postForm) {
+        Post post = this.postDao.findById(postForm.getId());
+        User user = this.userDao.findById(postForm.getUserId());
+        post.setTitle(postForm.getTitle());
+        post.setDescription(postForm.getDescription());
+        post.setUser(user);
+
+        this.postDao.update(post);
+    }
+
+    @Override
+    public void deletePostById(Long id) {
+        Post post = this.postDao.findById(id);
+        this.postDao.delete(post);
+    }
 }

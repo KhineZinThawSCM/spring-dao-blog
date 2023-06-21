@@ -2,6 +2,7 @@ package springblog.bl.dto;
 
 import springblog.persistence.entity.User;
 
+import java.sql.Timestamp;
 import java.util.List;import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ public class UserDTO{
     private String name;
     private String email;
     private String password;
+    private Timestamp created_at;
     private List<PostDTO> posts; 
 
     public UserDTO() {
@@ -28,8 +30,7 @@ public class UserDTO{
     	this.name = user.getName();
     	this.email = user.getEmail();
     	this.password = user.getPassword();
-    	this.posts = user.getPosts().stream().map(post -> 
-    	   new PostDTO(post)
-    	).collect(Collectors.toList());
+    	this.created_at = user.getCreated_at();
+    	this.posts = user.getPosts().stream().map(post -> new PostDTO(post)).collect(Collectors.toList());
     }
 }

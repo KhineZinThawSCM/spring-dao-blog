@@ -44,7 +44,7 @@ public class Post {
 	@UpdateTimestamp
 	private Timestamp updated_at;
 
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
+	@ManyToOne(cascade = {CascadeType.PERSIST})
 	@JoinColumn(name = "user_id")
 	private User user;
 	

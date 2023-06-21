@@ -1,7 +1,12 @@
 package springblog.web.controllers;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import springblog.bl.dto.UserDTO;
 import springblog.bl.services.user.UserService;
+import springblog.export.UserExcelExporter;
 import springblog.web.form.UserForm;
 
 @Controller
@@ -77,4 +83,21 @@ public class UserController {
 
 		return "redirect:/users";
 	}
+	
+	@RequestMapping("/users/excel/export")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+         
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+         
+        List<UserDTO> users = this.userService.getAllUsers();
+         
+        UserExcelExporter excelExporter = new UserExcelExporter(users);
+         
+        excelExporter.export(response);    
+    }  
 }

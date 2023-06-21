@@ -1,7 +1,12 @@
 package springblog.web.controllers;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +22,8 @@ import springblog.bl.dto.PostDTO;
 import springblog.bl.dto.UserDTO;
 import springblog.bl.services.post.PostService;
 import springblog.bl.services.user.UserService;
+import springblog.export.PostExcelExporter;
+import springblog.export.UserExcelExporter;
 import springblog.web.form.PostForm;
 
 @Controller
@@ -93,4 +100,21 @@ public class PostController {
 		
 		return "redirect:/posts";
 	}
+	
+	@RequestMapping("/posts/excel/export")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+         
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=posts_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+         
+        List<PostDTO> posts = this.postService.getAllPosts();
+         
+        PostExcelExporter excelExporter = new PostExcelExporter(posts);
+         
+        excelExporter.export(response);    
+    }  
 }
