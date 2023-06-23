@@ -28,7 +28,7 @@ public class PostExcelExporter {
     }
 
     private void writeHeaderLine() {
-        sheet = workbook.createSheet("Users");
+        sheet = workbook.createSheet("Posts");
 
         Row row = sheet.createRow(0);
 
