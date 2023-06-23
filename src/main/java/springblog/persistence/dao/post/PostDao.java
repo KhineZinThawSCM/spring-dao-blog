@@ -7,6 +7,8 @@ import springblog.persistence.entity.Post;
 public interface PostDao {
 	List<Post> getAllPosts();
 	
+	List<Post> getSearchPosts(String keyword);
+	
 	void save(Post post);
 	
 	Post findById(Long id);

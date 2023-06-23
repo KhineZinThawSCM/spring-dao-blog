@@ -7,6 +7,8 @@ import springblog.web.form.UserForm;
 
 public interface UserService {
 	List<UserDTO> getAllUsers();
+	
+	List<UserDTO> getSearchUsers(String keyword);
 
 	void saveUser(UserForm userForm);
 

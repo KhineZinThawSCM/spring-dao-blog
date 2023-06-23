@@ -32,6 +32,16 @@ public class PostServiceImpl implements PostService {
         }).collect(Collectors.toList());
         return postDTOList;
     }
+    
+    @Override
+    public List<PostDTO> getSearchPosts(String keyword) {
+        List<Post> posts = this.postDao.getSearchPosts(keyword);
+        List<PostDTO> postDTOList = posts.stream().map(post -> {
+            PostDTO postDTO = new PostDTO(post);
+            return postDTO;
+        }).collect(Collectors.toList());
+        return postDTOList;
+    }
 
     @Override
     public void savePost(PostForm postForm) {

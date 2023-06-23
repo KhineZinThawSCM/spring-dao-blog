@@ -35,6 +35,15 @@ public class UserController {
 		mv.addObject("users", users);
 		return mv;
 	}
+	
+	@RequestMapping("/users/search")
+    public ModelAndView search(@RequestParam("keyword") String keyword) {
+        List<UserDTO> users = this.userService.getSearchUsers(keyword);
+        ModelAndView mv = new ModelAndView("userListView");
+        mv.addObject("users", users);
+        return mv;
+    }
+
 
 	@RequestMapping("/users/create")
 	public ModelAndView create() {

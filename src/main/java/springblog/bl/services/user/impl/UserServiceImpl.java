@@ -27,6 +27,16 @@ public class UserServiceImpl implements UserService {
 		}).collect(Collectors.toList());
 		return userDTOList;
 	}
+	
+	@Override
+    public List<UserDTO> getSearchUsers(String keyword) {
+        List<User> users = this.userDao.getSearchUsers(keyword);
+        List<UserDTO> userDTOList = users.stream().map(user -> {
+            UserDTO userDTO = new UserDTO(user);
+            return userDTO;
+        }).collect(Collectors.toList());
+        return userDTOList;
+    }
 
 	@Override
 	public void saveUser(UserForm userForm) {

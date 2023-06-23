@@ -7,7 +7,7 @@
   <div class="d-flex justify-content-between">
     <div class="d-flex justify-content-between" style="width: 15%">
       <h3>User List</h3>
-       <c:url var="exportAction" value="/users/excel/export" />
+      <c:url var="exportAction" value="/users/excel/export" />
       <a href="${exportAction}" class="btn btn-secondary">Export</a>
     </div>
     <div>
@@ -36,9 +36,11 @@
           <td>${user.id}</td>
           <td>${user.name}</td>
           <td>${user.email}</td>
-          <td><c:forEach items="${user.posts}" var="post">
-                          ${post.title}
-                      </c:forEach></td>
+          <td>
+            <c:forEach items="${user.posts}" var="post">
+                <span class="badge bg-primary">${post.title}</span>
+            </c:forEach>
+          </td>
           <td><c:url var="editAction"
               value="/users/edit?id=${user.id}" /> <c:url
               var="deleteAction" value="/users/destroy?id=${user.id}" />

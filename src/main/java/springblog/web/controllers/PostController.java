@@ -43,6 +43,14 @@ public class PostController {
 		return mv;
 	}
 	
+	@RequestMapping("/posts/search")
+    public ModelAndView search(@RequestParam("keyword") String keyword) {
+        List<PostDTO> posts = this.postService.getSearchPosts(keyword);
+        ModelAndView mv = new ModelAndView("postListView");
+        mv.addObject("posts", posts);
+        return mv;
+    }
+	
 	@RequestMapping("/posts/create")
 	public ModelAndView create() {
 		List<UserDTO> users = this.userService.getAllUsers();

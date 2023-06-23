@@ -1,5 +1,6 @@
 package springblog.web.form;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class PostForm {
 	@NotBlank(message = "Description field is required")
 	private String description;
 	
-//	@NotBlank(message = "User Name field is required")
+	@Min(value = 1, message = "User name field is required")
 	private Long userId;
 	
 	public PostForm(PostDTO postDTO) {

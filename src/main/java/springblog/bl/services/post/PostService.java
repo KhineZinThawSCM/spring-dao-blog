@@ -9,6 +9,8 @@ import springblog.web.form.PostForm;
 public interface PostService {
 	List<PostDTO> getAllPosts();
 	
+	List<PostDTO> getSearchPosts(String keyword);
+	
 	void savePost(PostForm postForm);
 
 	PostDTO getPostById(Long id);

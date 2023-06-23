@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +28,18 @@ public class PostDaoImpl implements PostDao {
     	 StringBuilder stmt = new StringBuilder(SELECT_STMT);
          return this.sessionFactory.getCurrentSession().createQuery(stmt.toString()).list();
 	}
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Post> getSearchPosts(String keyword) {
+         StringBuilder stmt = new StringBuilder(SELECT_STMT);
+         stmt.append(" AS P");
+         stmt.append(" LEFT JOIN FETCH P.user as U");
+         stmt.append(" WHERE P.title LIKE :keyword OR P.description LIKE :keyword OR U.name LIKE :keyword");
+         Query<Post> query = this.sessionFactory.getCurrentSession().createQuery(stmt.toString());
+         query.setParameter("keyword", "%" + keyword + "%");
+         return query.list();
+    }
     
     @Override
     public void save(Post post) {
