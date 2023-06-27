@@ -5,15 +5,19 @@ import java.util.List;
 import springblog.persistence.entity.User;
 
 public interface UserDao {
-	List<User> getAllUsers();
-	
-	List<User> getSearchUsers(String keyword);
-	
-	void save(User user);
-	
-	User findById(Long id);
-	
-	void update(User user);
-	
-	void delete(User user);
+    List<User> getAllUsers();
+
+    List<User> getSearchUsers(String keyword);
+
+    void save(User user);
+
+    void update(User user);
+
+    void delete(User user);
+
+    User findByEmail(String email);
+
+    User findById(Long id);
+
+    User findByName(String name);
 }

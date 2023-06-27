@@ -8,5 +8,6 @@
 </head>
 <body>
 	${message}
+    <a href="/springblog/logout">Logout</a>
 </body>
 </html>

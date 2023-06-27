@@ -28,6 +28,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Email</th>
+        <th>Role</th>
         <th>Posts</th>
         <th>Action</th>
       </tr>
@@ -36,6 +37,11 @@
           <td>${user.id}</td>
           <td>${user.name}</td>
           <td>${user.email}</td>
+          <td>
+            <c:forEach items="${user.roles}" var="role">
+                <span class="badge bg-primary">${role}</span>
+            </c:forEach>
+          </td>
           <td>
             <c:forEach items="${user.posts}" var="post">
                 <span class="badge bg-primary">${post.title}</span>

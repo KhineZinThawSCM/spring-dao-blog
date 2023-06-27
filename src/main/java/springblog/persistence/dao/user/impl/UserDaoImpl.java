@@ -45,6 +45,15 @@ public class UserDaoImpl implements UserDao {
     public User findById(Long id) {
         return this.sessionFactory.getCurrentSession().get(User.class, id);
     }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public User findByName(String name) {
+        StringBuilder stmt = new StringBuilder(SELECT_STMT);
+        stmt.append(" WHERE name= :name");
+        List<User> user = this.sessionFactory.getCurrentSession().createQuery(stmt.toString()).setParameter("name", name).list();
+        return (!user.isEmpty()) ? user.get(0) : null;
+    }
 
     @Override
     public void save(User user) {
@@ -59,5 +68,15 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void delete(User user) {
         this.sessionFactory.getCurrentSession().delete(user);
+    }
+    
+    @Override
+    public User findByEmail(String email) {
+        StringBuilder stmt = new StringBuilder(SELECT_STMT);
+        stmt.append(" WHERE email= :email");
+        return  this.sessionFactory.getCurrentSession()
+                .createQuery(stmt.toString(), User.class)
+                .setParameter("email", email)
+                .getSingleResult();
     }
 }

@@ -4,19 +4,29 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import springblog.bl.dto.UserDTO;
 import springblog.bl.services.user.UserService;
+import springblog.persistence.dao.role.RoleDao;
 import springblog.persistence.dao.user.UserDao;
 import springblog.persistence.entity.User;
 import springblog.web.form.UserForm;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private RoleDao roleDao;
+	
+	@Autowired 
+	PasswordEncoder passwordEncoder;
 
 	@Override
 	public List<UserDTO> getAllUsers() {
@@ -43,7 +53,8 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 		user.setName(userForm.getName());
 		user.setEmail(userForm.getEmail());
-		user.setPassword(userForm.getPassword());
+		user.setPassword(passwordEncoder.encode(userForm.getPassword()));
+		user.getRoles().add(this.roleDao.findById(userForm.getRoleId()));
 		this.userDao.save(user);
 	}
 
@@ -59,7 +70,7 @@ public class UserServiceImpl implements UserService {
 		User user = this.userDao.findById(userForm.getId());
 		user.setName(userForm.getName());
 		user.setEmail(userForm.getEmail());
-		user.setPassword(userForm.getPassword());
+		user.getRoles().add(this.roleDao.findById(userForm.getRoleId()));
 		this.userDao.update(user);
 	}
 
