@@ -20,7 +20,7 @@
     <div class="btn-group">
       <button type="button" class="btn btn-secondary dropdown-toggle"
         data-bs-toggle="dropdown" data-bs-display="static"
-        aria-expanded="false">${pageContext.request.userPrincipal.name}</button>
+        aria-expanded="false"><c:out value="${user.name}" /></button>
       <ul class="dropdown-menu dropdown-menu-start">
         <c:url var="logoutAction" value="/logout" />
         <li><a href="${logoutAction}" class="dropdown-item">Logout</a></li>
