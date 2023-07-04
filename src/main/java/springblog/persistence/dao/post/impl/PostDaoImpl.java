@@ -53,9 +53,8 @@ public class PostDaoImpl implements PostDao {
     
     @Override
     public void update(Post post) {
-        Post oldPost = this.findById(post.getId());
         if (post.getUser() == null) {
-            post.setUser(oldPost.getUser());
+            post.setUser(post.getUser());
         }
         this.sessionFactory.getCurrentSession().merge(post);
     }

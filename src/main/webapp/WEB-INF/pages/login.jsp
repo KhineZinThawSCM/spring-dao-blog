@@ -53,6 +53,7 @@
           <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </form>
+        <a href="<c:url value="/forgot_password" />" class="text-center">Forgot password?</a>
       </div>
     </div>
   </div>

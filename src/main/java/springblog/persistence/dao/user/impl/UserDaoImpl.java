@@ -70,13 +70,12 @@ public class UserDaoImpl implements UserDao {
         this.sessionFactory.getCurrentSession().delete(user);
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     public User findByEmail(String email) {
         StringBuilder stmt = new StringBuilder(SELECT_STMT);
         stmt.append(" WHERE email= :email");
-        return  this.sessionFactory.getCurrentSession()
-                .createQuery(stmt.toString(), User.class)
-                .setParameter("email", email)
-                .getSingleResult();
+        List<User> user = this.sessionFactory.getCurrentSession().createQuery(stmt.toString()).setParameter("email", email).list();
+        return (!user.isEmpty()) ? user.get(0) : null;
     }
 }

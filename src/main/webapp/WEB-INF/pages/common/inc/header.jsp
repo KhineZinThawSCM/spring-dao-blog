@@ -1,21 +1,20 @@
-<%@ taglib uri="http://www.springframework.org/security/tags"
-  prefix="security"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
   prefix="security"%>
 <nav class="navbar-dark bg-dark px-5">
   <div class="navbar navbar-expand navbar-dark">
-    <a class="navbar-brand" href="/springblog/posts">Blog</a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/posts">Blog</a>
     <ul class="navbar-nav me-auto">
       <li class="nav-item"><a class="nav-link"
-        href="/springblog/posts">Home</a></li>
+        href="${pageContext.request.contextPath}/posts">Home</a></li>
       <security:authorize access="hasAuthority('user')">
         <li class="nav-item"><a class="nav-link"
-          href="/springblog/posts">Posts</a></li>
+          href="${pageContext.request.contextPath}/posts">Posts</a></li>
       </security:authorize>
       <security:authorize access="hasAuthority('admin')">
         <li class="nav-item"><a class="nav-link"
-          href="/springblog/users">Users</a></li>
+          href="${pageContext.request.contextPath}/users">Users</a></li>
       </security:authorize>
     </ul>
     <div class="btn-group">

@@ -23,7 +23,6 @@ import springblog.bl.dto.UserDTO;
 import springblog.bl.services.post.PostService;
 import springblog.bl.services.user.UserService;
 import springblog.export.PostExcelExporter;
-import springblog.export.UserExcelExporter;
 import springblog.web.form.PostForm;
 
 @Controller

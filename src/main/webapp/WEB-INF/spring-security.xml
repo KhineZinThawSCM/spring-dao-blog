@@ -16,6 +16,12 @@
 			access="hasAuthority('admin')" />
 		<security:intercept-url pattern="/login*"
 			access="permitAll" />
+		<security:intercept-url pattern="/forgot_password/**"
+			access="permitAll" />
+		<security:intercept-url pattern="/reset_password*"
+			access="permitAll" />
+		<security:intercept-url pattern="/reset_password/**"
+			access="permitAll" />
 		<security:intercept-url pattern="/**"
 			access="isAuthenticated()" />
 		<security:form-login login-page="/login"
