@@ -7,7 +7,7 @@
   <h1>User Create</h1>
   <c:url var="storeAction" value="/users/store"></c:url>
   <form:form action="${storeAction}" method="POST"
-    modelAttribute="userForm">
+    modelAttribute="userForm" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
       <form:input type="text" path="name" class="form-control"
@@ -35,6 +35,11 @@
         </c:forEach>
       </form:select>
       <form:errors path="roleId" cssClass="text-danger" />
+    </div>
+    <div class="mb-3">
+      <label for="photo" class="form-label">Photo</label>
+      <form:input type="file" path="photo" class="form-control" />
+      <form:errors path="photo" cssClass="text-danger" />
     </div>
     <div class="mb-3">
       <button type="submit" class="btn btn-success">Add New</button>

@@ -7,6 +7,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import springblog.bl.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,9 +30,11 @@ public class UserForm {
 	@Email(message = "Invalid email format")
 	private String email;
 	
-	@NotBlank(message = "The password field is required.")
-	@Size(min = 8, message = "Password must be at least 8 characters")
+//	@NotBlank(message = "The password field is required.")
+//	@Size(min = 8, message = "Password must be at least 8 characters")
 	private String password;
+
+	private MultipartFile photo;
 	
 	@Min(value = 1, message = "Role name field is required")
 	private Long roleId;

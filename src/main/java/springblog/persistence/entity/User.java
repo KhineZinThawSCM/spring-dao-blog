@@ -55,7 +55,10 @@ public class User {
     
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private ResetPasswordToken resetPasswordToken;
-
+    
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private UserProfile userProfile;
+    
     public User() {
     	super();
         this.roles = new HashSet<>();

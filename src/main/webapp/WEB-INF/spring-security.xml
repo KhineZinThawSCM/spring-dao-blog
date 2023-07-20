@@ -22,7 +22,11 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/reset_password/**"
 			access="permitAll" />
+		<security:intercept-url pattern="/api/**"
+			access="permitAll" />
 		<security:intercept-url pattern="/**"
+			access="isAuthenticated()" />
+			<security:intercept-url pattern="/resources/**"
 			access="isAuthenticated()" />
 		<security:form-login login-page="/login"
 			login-processing-url="/login" username-parameter="username"

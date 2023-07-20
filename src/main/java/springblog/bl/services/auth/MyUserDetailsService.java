@@ -22,16 +22,12 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = this.userDao.findByEmail(username);
-        UserDTO userDTO = new UserDTO(user);
-
         if (user == null) {
             throw new UsernameNotFoundException("Invalid Username or Password");
         }
+        
+        UserDTO userDTO = new UserDTO(user);
 
-        return  org.springframework.security.core.userdetails.User.builder()
-                .username(userDTO.getEmail())
-                .password(userDTO.getPassword())
-                .authorities(userDTO.getRoles())
-                .build();
+        return  userDTO;
     }
 }

@@ -20,7 +20,6 @@ public class EmailExistValidator implements ConstraintValidator<EmailExist, Stri
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        // Perform validation logic
         User user = userDao.findByEmail(email);
         return user != null;
     }

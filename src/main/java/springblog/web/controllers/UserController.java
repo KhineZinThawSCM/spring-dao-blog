@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,7 +37,11 @@ public class UserController {
     public ModelAndView index() {
         List<UserDTO> users = this.userService.getAllUsers();
         ModelAndView mv = new ModelAndView("userListView");
+        String catalinaHome = System.getProperty("catalina.home");
+        String filePath = catalinaHome + "/" + "webapps" + "/" + "springblog" + "/"
+                + "user-photos" + "/";
         mv.addObject("users", users);
+        mv.addObject("filePath", filePath.replace("\\", "/"));
         return mv;
     }
 
@@ -88,7 +91,7 @@ public class UserController {
     public ModelAndView update(@ModelAttribute("userForm") @Valid UserForm userForm, BindingResult bindingResult) {
         ModelAndView mv = new ModelAndView();
         if (bindingResult.hasErrors()) {
-            System.out.println("not passed");
+            System.out.println(bindingResult.getFieldError());
             List<RoleDTO> roles = this.roleService.getAllRoles();
             mv.setViewName("userEditView");
             mv.addObject("roles", roles);

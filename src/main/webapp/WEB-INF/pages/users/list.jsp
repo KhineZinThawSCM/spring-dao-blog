@@ -2,7 +2,7 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="container py-5">
   <div class="d-flex justify-content-between">
     <div class="d-flex justify-content-between" style="width: 15%">
@@ -29,6 +29,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Photo</th>
         <th>Posts</th>
         <th>Action</th>
       </tr>
@@ -37,16 +38,13 @@
           <td>${user.id}</td>
           <td>${user.name}</td>
           <td>${user.email}</td>
-          <td>
-            <c:forEach items="${user.roles}" var="role">
-                <span class="badge bg-primary">${role}</span>
-            </c:forEach>
-          </td>
-          <td>
-            <c:forEach items="${user.posts}" var="post">
-                <span class="badge bg-primary">${post.title}</span>
-            </c:forEach>
-          </td>
+          <td><c:forEach items="${user.roles}" var="role">
+              <span class="badge bg-primary">${role}</span>
+            </c:forEach></td>
+          <td><img src="resources/image/${user.userProfile.photo}" width="50" /></td>
+          <td><c:forEach items="${user.posts}" var="post">
+              <span class="badge bg-primary">${post.title}</span>
+            </c:forEach></td>
           <td><c:url var="editAction"
               value="/users/edit?id=${user.id}" /> <c:url
               var="deleteAction" value="/users/destroy?id=${user.id}" />
