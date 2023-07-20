@@ -1,1 +1,1 @@
-# Blog Project using Spring MVC
+# Blog DAO Project using Spring MVC
